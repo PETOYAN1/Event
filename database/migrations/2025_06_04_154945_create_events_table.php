@@ -13,6 +13,17 @@ return new class extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->enum('status', ['moderation', 'published', 'closed']);
+            $table->string('title');
+            $table->text('description')->nullable();
+            $table->string('location')->nullable();
+            $table->dateTime('date');
+            $table->time('time')->nullable();
+            $table->integer('duration')->default(0);
+            $table->enum('duration_unit', ['minutes', 'hours', 'days'])->default('hours');
+            $table->enum('gender', ['male', 'female', 'other'])->default('male');
+            $table->integer('members_count')->default(0);
             $table->timestamps();
         });
     }

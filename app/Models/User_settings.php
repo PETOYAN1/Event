@@ -6,25 +6,25 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\User;
 
-class Event extends Model
+class User_settings extends Model
 {
     use HasFactory;
+    /**
+     * The attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
     /**
      * The table associated with the model.
      *
      * @var string
      */
     protected $fillable = [
-        'status',
-        'title',
-        'description',
-        'location',
-        'date',
-        'time',
-        'gender',
-        'members_count'
+        'theme',
+        'email_notifications',
+        'push_notifications',
+        'settings'
     ];
-
     public function users()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');

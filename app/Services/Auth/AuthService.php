@@ -28,7 +28,9 @@ class AuthService
                 'phone' => $data['phone'],
                 'password' => Hash::make($data['password']),
             ]);
+
             // Generate a token for the user
+            
             $token = $user->createToken('token')->plainTextToken;
             return [
             'token' => $token,

@@ -3,6 +3,17 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\Request;
+use Spatie\Permission\Exceptions\UnauthorizedException;
+use Spatie\Permission\Middleware\PermissionMiddleware;
+use Spatie\Permission\Middleware\RoleMiddleware;
+use Spatie\Permission\Middleware\RoleOrPermissionMiddleware;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
+
+
+// This file is part of the Laravel framework.
+// (c) Laravel LLC <https://laravel.com>
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -12,8 +23,18 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->alias([
+            'role' => RoleMiddleware::class,
+            'permission' => PermissionMiddleware::class,
+            'role_or_permission' => RoleOrPermissionMiddleware::class
+        ]);
+
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        //
+                $exceptions->renderable(function (UnauthorizedException $e, $request) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+            ], 403);
+        });
     })->create();

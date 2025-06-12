@@ -7,6 +7,9 @@ use App\Models\User_settings;
 use App\Models\Event;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Database\Seeders\RoleSeeder;
+use Database\Seeders\UserSeeder;
+use Database\Seeders\AdminSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,5 +21,12 @@ class DatabaseSeeder extends Seeder
         User::factory(10)->create();
         User_settings::factory(10)->create();
         Event::factory(10)->create();
+
+        $this->call([
+            RoleSeeder::class,
+            UserSeeder::class,
+            AdminSeeder::class,
+        ]);
     }
+
 }

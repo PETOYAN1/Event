@@ -17,7 +17,7 @@ return new class extends Migration
             $table->boolean('email_notifications')->default(true);
             $table->boolean('push_notifications')->default(true);
             $table->enum('theme', ['light', 'dark'])->default('light');
-            $table->json('settings')->nullable();
+            // $table->json('settings')->nullable();
             $table->timestamps();
         });
     }

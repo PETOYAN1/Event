@@ -22,10 +22,10 @@ class User_settingsFactory extends Factory
             'email_notifications' => $this->faker->boolean(),
             'push_notifications' => $this->faker->boolean(),
             'theme' => $this->faker->randomElement(['light', 'dark']),
-            'settings' => json_encode([
-                'language' => $this->faker->randomElement(['en', 'fr', 'es']),
-                'timezone' => $this->faker->timezone,
-            ]),
+            // 'settings' => json_encode([
+            //     'language' => $this->faker->randomElement(['en', 'fr', 'es']),
+            //     'timezone' => $this->faker->timezone,
+            // ]),
         ];
     }
 }
